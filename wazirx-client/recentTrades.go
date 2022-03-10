@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	api "wazirx-go/wazirx-client/endpoints"
+	api "github.com/yuvan11/wazirx-go/wazirx-client/endpoints"
 )
 
 type RecentTradesService struct {

@@ -12,7 +12,8 @@ import (
 	"net/http"
 	"net/url"
 
-	api "wazirx-go/wazirx-client/endpoints"
+	
+	api "github.com/yuvan11/wazirx-go/wazirx-client/endpoints"
 )
 
 type doFunc func(req *http.Request) (*http.Response, error)

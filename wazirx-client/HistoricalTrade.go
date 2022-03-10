@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	helpers "wazirx-go/wazirx-client/Helpers"
-	api "wazirx-go/wazirx-client/endpoints"
+	helpers "github.com/yuvan11/wazirx-go/wazirx-client/Helpers"
+	api "github.com/yuvan11/wazirx-go/wazirx-client/endpoints"
 )
 
 type HistoricalTrades struct {
