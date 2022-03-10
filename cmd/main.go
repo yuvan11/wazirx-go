@@ -3,7 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	wazirx "wazirx-go/wazirx-client"
+
+	wazirx "github.com/yuvan11/wazirx-go/wazirx-client"
 )
 
 func main() {
