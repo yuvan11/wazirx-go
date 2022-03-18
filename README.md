@@ -1,5 +1,5 @@
-# Wazrix-go
-A go client library for [wazrix](https://wazirx.com/exchange) REST [APIs](https://docs.wazirx.com/)
+# Wazirx-go
+A go client library for [wazirx](https://wazirx.com/exchange) REST [APIs](https://docs.wazirx.com/)
 
 <p align="center" >
 <img  src="https://user-images.githubusercontent.com/49576526/158990567-53ceb4a8-8a75-4d15-b407-9ee9f21168c7.png" width="200" height="200">
@@ -7,7 +7,7 @@ A go client library for [wazrix](https://wazirx.com/exchange) REST [APIs](https:
 
 ## Description
 
-[Wazrix-go](https://github.com/yuvan11/wazirx-go) is a go library for Wazirx Rest API integration for spot exchange
+[wazirx-go](https://github.com/yuvan11/wazirx-go) is a go library for Wazirx Rest API integration for spot exchange
 
 ### Available APIs
 - [x] Common API
@@ -57,9 +57,9 @@ It is prerequisite to have Go installed on your machine. [Steps to install Go](h
 
 ### API Key Setup
 
-* Some API requires API key to verify the client request. For API Key Creation, have a look at [here](https://docs.wazirx.com/#api-key-setup).
-* Sign in to wazirx account and go to [settings](https://wazirx.com/settings/profile) and then click [API KEY MANAGER](https://wazirx.com/settings/keys) at the bottom.
-* Here, you can create a new key :)
+* Some API requires an API key to verify the client request. For API Key creation,check [here](https://docs.wazirx.com/#api-key-setup).
+* Sign in to the wazirx account and go to the [settings](https://wazirx.com/settings/profile) and then click [API KEY MANAGER](https://wazirx.com/settings/keys) at the bottom.
+* Here, you can create your api key :smiley:
 
 ![image](https://user-images.githubusercontent.com/49576526/158996724-19916547-00be-4509-817f-b3cad1752f7d.png)
 
