@@ -75,49 +75,70 @@ ctx := context.TODO()
 
 - #### General API
     - *Server Time* 
-             // Server service initiates
+             
+	     	// Server service initiates
         	fmt.Println(client.NewServerTimeService().FetchServerTime(ctx))
+
     - *System Status*
-            // System status service initiates
+   
+              // System status service initiates
 	        fmt.Println(client.NewSystemStatusService().FetchSystemStatus(ctx))
 	- *Exchange Info*
+	
 	         // Exchange status service initiates
             fmt.Println(client.NewExchangeInfoService().FetchExchangeInfo(ctx))
 
 - #### Market Data API
     - *Tickers*  
-             // Tickers service initiates
-            fmt.Println(client.NewTickersService().DisplayTickersData(ctx))
+    
+    	     // Tickers service initiates
+        	fmt.Println(client.NewTickersService().DisplayTickersData(ctx))
     - *Ticker*
-            // Ticker service initiates
-        	fmt.Println(client.NewTickerService().SetSymbol("manausdt").TickerData(ctx))
-	- *OrderBook Depth*
+    
+       	       // Ticker service initiates
+               fmt.Println(client.NewTickerService().SetSymbol("manausdt").TickerData(ctx))
+     - *OrderBook Depth*
+      
 	        // Market depth service initiates
 	        fmt.Println(client.NewOrderBookDepthService().SetLimit(10).SetSymbol("manausdt").DisplayOrdersBookDepth(ctx))
     - *Recent Trades*
+    
 	        // Market trade service initiates
         	fmt.Println(client.NewRecentTradesService().SetLimit(10).SetSymbol("manausdt").DisplayRecentMarketTrade(ctx))
     - *Historical Trades*
+    
 	        // Historical trade service initiates
             fmt.Println(client.NewHistoricalTradesService().SetSymbol("manausdt").DisplayHistoricalTrade(ctx))
 
 - #### Websocket Auth Token API
     - *Create Auth Token* 
+    
             // Generate auth token service initiates
             fmt.Println(client.NewAuthInfoService().CreateAuthToken(ctx))
 
 - #### Account API
     - *Account Info* 
+    
             // Account display service initiates
             fmt.Println(client.NewAccountInfoService().FetchAccountInfo(ctx))
     - *Funds*
+    
              // Account funds service initiates
 	        fmt.Println(client.NewFundInfoService().FetchFundsInfo(ctx))
         
 
+     -  *Example to fetch asset price greater than "0.0" and its asset name*
 
+	```go
+	for _, a := range *client.NewFundInfoService().FetchFundsInfo(ctx) {
+
+		if a.Free > "0.00" {
+			fmt.Println("asset", a.Asset, "free", a.Free)
+		}
+
+	}
+	```
 <!--
-
 ## Help
 
 Any advise for common problems or issues.
