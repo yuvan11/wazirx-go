@@ -54,7 +54,7 @@ type SystemStatus struct {
 	Message string `json:"message"`
 }
 
-func (s *SystemStatusService) FetchServerStatus(ctx context.Context) *SystemStatus {
+func (s *SystemStatusService) FetchSystemStatus(ctx context.Context) *SystemStatus {
 
 	r := &Request{
 		Method:   http.MethodGet,
