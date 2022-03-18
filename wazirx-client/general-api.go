@@ -16,7 +16,7 @@ type PingService struct {
 	C *Client
 }
 
-func (s *PingService) FetchPingStatus(ctx context.Context) (res string) {
+func (s *PingService) FetchPingStatus(ctx context.Context) (res string, err error) {
 
 	r := &Request{
 		Method:   http.MethodGet,
@@ -27,11 +27,11 @@ func (s *PingService) FetchPingStatus(ctx context.Context) (res string) {
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println("Error in Handling API")
+		return "", err
 	}
 	res = string(data)
 
-	return res
+	return res, nil
 }
 
 // SERVER TIME
@@ -54,7 +54,7 @@ type SystemStatus struct {
 	Message string `json:"message"`
 }
 
-func (s *SystemStatusService) FetchSystemStatus(ctx context.Context) *SystemStatus {
+func (s *SystemStatusService) FetchSystemStatus(ctx context.Context) (*SystemStatus, error) {
 
 	r := &Request{
 		Method:   http.MethodGet,
@@ -65,19 +65,19 @@ func (s *SystemStatusService) FetchSystemStatus(ctx context.Context) *SystemStat
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &SystemStatus{}, err
 	}
 
 	result := new(SystemStatus)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &SystemStatus{}, err
 	}
 
-	return result
+	return result, nil
 }
 
-func (s *ServerTimeService) FetchServerTime(ctx context.Context) *ServerTime {
+func (s *ServerTimeService) FetchServerTime(ctx context.Context) (*ServerTime, error) {
 
 	r := &Request{
 		Method:   http.MethodGet,
@@ -94,10 +94,10 @@ func (s *ServerTimeService) FetchServerTime(ctx context.Context) *ServerTime {
 	result := new(ServerTime)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &ServerTime{}, err
 	}
 
-	return result
+	return result, nil
 }
 
 //  EXCHANGE INFORMATION
