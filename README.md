@@ -55,6 +55,15 @@ A go client library for [wazrix](https://wazirx.com/exchange) REST [APIs](https:
 ### Prerequisites
 It is prerequisite to have Go installed on your machine. [Steps to install Go](https://golang.org/doc/install?download)
 
+### API Key Setup
+
+* Some API requires API key to verify the client request. For API Key Creation, have a look at [here](https://docs.wazirx.com/#api-key-setup).
+* Sign in to wazirx account and go to [settings](https://wazirx.com/settings/profile) and then click [API KEY MANAGER](https://wazirx.com/settings/keys) at the bottom.
+* Here, you can create a new key :)
+
+![image](https://user-images.githubusercontent.com/49576526/158996724-19916547-00be-4509-817f-b3cad1752f7d.png)
+
+
 ### Installing
 	
 	git clone https://github.com/yuvan11/wazirx-go.git
