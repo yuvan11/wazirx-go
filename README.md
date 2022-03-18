@@ -1,6 +1,9 @@
 # Wazrix-go
-
 A go client library for [wazrix](https://wazirx.com/exchange) REST [APIs](https://docs.wazirx.com/)
+
+<p align="center" >
+<img  src="https://user-images.githubusercontent.com/49576526/158990567-53ceb4a8-8a75-4d15-b407-9ee9f21168c7.png" width="200" height="200">
+</p>
 
 ## Description
 
@@ -53,15 +56,18 @@ A go client library for [wazrix](https://wazirx.com/exchange) REST [APIs](https:
 It is prerequisite to have Go installed on your machine. [Steps to install Go](https://golang.org/doc/install?download)
 
 ### Installing
+	
+	git clone https://github.com/yuvan11/wazirx-go.git
 
-*  clone [repo](https://github.com/yuvan11/wazirx-go.git) 
-        git clone https://github.com/yuvan11/wazirx-go.git
-
+### Structure
+<p align="center">
+<img  src="https://user-images.githubusercontent.com/49576526/158992492-3a0197d7-7e36-45c0-b63c-5dfa277a295c.png" width="400" height="250">
+</p>
 
 ### Executing program
 
-        cd wazirx-go/cmd
-        go run main.go
+    cd wazirx-go/cmd
+    go run main.go
         
 - #### Starting a client
         
