@@ -23,7 +23,7 @@ func main() {
 	fmt.Println(client.NewServerTimeService().FetchServerTime(ctx))
 
 	// System status service initiates
-	fmt.Println(client.NewSystemStatusService().FetchServerStatus(ctx))
+	fmt.Println(client.NewSystemStatusService().FetchSystemStatus(ctx))
 
 	// Exchange status service initiates
 	fmt.Println(client.NewExchangeInfoService().FetchExchangeInfo(ctx))
