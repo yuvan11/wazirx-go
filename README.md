@@ -129,15 +129,15 @@ ctx := context.TODO()
 
      -  *Example to fetch asset price greater than "0.0" and its asset name*
 
-	```go
-	for _, a := range *client.NewFundInfoService().FetchFundsInfo(ctx) {
+        ```go
+        for _, a := range *client.NewFundInfoService().FetchFundsInfo(ctx) {
 
-		if a.Free > "0.00" {
-			fmt.Println("asset", a.Asset, "free", a.Free)
-		}
+            if a.Free > "0.00" {
+                fmt.Println("asset", a.Asset, "free", a.Free)
+            }
 
-	}
-	```
+        }
+        ```
 <!--
 ## Help
 
