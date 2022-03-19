@@ -35,7 +35,7 @@ func TestPingService_FetchPingStatus(t *testing.T) {
 			args: args{
 				ctx: context.TODO(),
 			},
-			wantRes: `{}`,
+			wantRes: "{ }",
 			WantErr: false,
 		},
 		{
@@ -52,7 +52,7 @@ func TestPingService_FetchPingStatus(t *testing.T) {
 			args: args{
 				ctx: context.TODO(),
 			},
-			wantRes: ``,
+			wantRes: "",
 			WantErr: true,
 		},
 	}
@@ -80,7 +80,7 @@ func TestServerTimeService_FetchServerTime(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "Server Time Test",
+			name: "Server Time Test +ve",
 			s: &ServerTimeService{
 				C: &Client{
 					ApiKey:     "",
@@ -101,7 +101,7 @@ func TestServerTimeService_FetchServerTime(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Server Time Test Negative(Removing BASE URL)",
+			name: "Server Time Test -ve(Removing BASE URL)",
 			s: &ServerTimeService{
 				C: &Client{
 					ApiKey:     "",
@@ -125,12 +125,17 @@ func TestServerTimeService_FetchServerTime(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			_, gotErr := tt.s.FetchServerTime(tt.args.ctx)
-			if (gotErr != nil) != tt.wantErr {
-				t.Errorf("ServerTimeService.FetchServerTime() = %v, want %v", gotErr, tt.wantErr)
+			if gotErr == nil {
+				if err := gotErr != nil; err != tt.wantErr {
+					t.Errorf("ServerTimeService.FetchServerTime() = %v, want %v", err, tt.wantErr)
+				}
 			}
-			if (gotErr != nil) != tt.wantErr {
-				t.Errorf("ServerTimeService.FetchServerTime() = %v, want %v", gotErr, tt.wantErr)
+			if gotErr != nil {
+				if err := gotErr == nil; err == tt.wantErr {
+					t.Errorf("ServerTimeService.FetchServerTime() = %v, want %v", err, tt.wantErr)
+				}
 			}
+
 		})
 	}
 }
@@ -193,14 +198,87 @@ func TestSystemStatusService_FetchSystemStatus(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.s.FetchSystemStatus(tt.args.ctx)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("SystemStatusService.FetchSystemStatus() error = %v, wantErr %v", err, tt.wantErr)
-				return
+			got, gotErr := tt.s.FetchSystemStatus(tt.args.ctx)
+			if gotErr == nil {
+				if err := gotErr != nil; err != tt.wantErr {
+					t.Errorf("SystemStatusService.FetchSystemStatus() error = %v, wantErr %v", err, tt.wantErr)
+					return
+				}
+				if !reflect.DeepEqual(got, tt.want) {
+					t.Errorf("SystemStatusService.FetchSystemStatus() = %v, want %v", got, tt.want)
+				}
+			} else {
+				if err := gotErr == nil; err == tt.wantErr {
+					t.Errorf("SystemStatusService.FetchSystemStatus() error = %v, wantErr %v", err, tt.wantErr)
+					return
+				}
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("SystemStatusService.FetchSystemStatus() = %v, want %v", got, tt.want)
+
+		})
+	}
+}
+
+func TestExchangeInfoService_FetchExchangeInfo(t *testing.T) {
+	type args struct {
+		ctx context.Context
+	}
+	tests := []struct {
+		name    string
+		s       *ExchangeInfoService
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "Exchange Info Test +ve",
+			s: &ExchangeInfoService{
+				C: &Client{
+					ApiKey:     "",
+					Secretkey:  "",
+					BaseURL:    api.BASE_URL,
+					HTTPClient: http.Client{},
+					do: func(req *http.Request) (*http.Response, error) {
+						return &http.Response{}, nil
+					},
+				},
+			},
+			args: args{
+				ctx: context.TODO(),
+			},
+			wantErr: false,
+		},
+		{
+			name: "Exchange Info Test -ve(Removing base URL)",
+			s: &ExchangeInfoService{
+				C: &Client{
+					ApiKey:     "",
+					Secretkey:  "",
+					BaseURL:    "",
+					HTTPClient: http.Client{},
+					do: func(req *http.Request) (*http.Response, error) {
+						return &http.Response{}, nil
+					},
+				},
+			},
+			args: args{
+				ctx: context.TODO(),
+			},
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			_, gotErr := tt.s.FetchExchangeInfo(tt.args.ctx)
+			if gotErr == nil {
+				if err := gotErr != nil; err != tt.wantErr {
+					t.Errorf("ExchangeInfoService.FetchExchangeInfo() error = %v, wantErr %v", err, tt.wantErr)
+				}
 			}
+			if gotErr != nil {
+				if err := gotErr == nil; err == tt.wantErr {
+					t.Errorf("ExchangeInfoService.FetchExchangeInfo() error = %v, wantErr %v", err, tt.wantErr)
+				}
+			}
+
 		})
 	}
 }
