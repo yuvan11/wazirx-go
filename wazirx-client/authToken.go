@@ -3,7 +3,6 @@ package wazirx_client
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"net/http"
 
@@ -20,7 +19,7 @@ type AuthInfo struct {
 	Timeout_Duration int32  `json:"timeout_duration"`
 }
 
-func (s *AuthInfoService) CreateAuthToken(ctx context.Context) *AuthInfo {
+func (s *AuthInfoService) CreateAuthToken(ctx context.Context) (*AuthInfo, error) {
 
 	r := &Request{
 		Method:     http.MethodPost,
@@ -33,15 +32,15 @@ func (s *AuthInfoService) CreateAuthToken(ctx context.Context) *AuthInfo {
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &AuthInfo{}, err
 	}
 
 	result := new(AuthInfo)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &AuthInfo{}, err
 	}
 
-	return result
+	return result, nil
 
 }
