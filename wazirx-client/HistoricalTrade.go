@@ -3,8 +3,8 @@ package wazirx_client
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
+
 	helpers "github.com/yuvan11/wazirx-go/wazirx-client/Helpers"
 	api "github.com/yuvan11/wazirx-go/wazirx-client/endpoints"
 )
@@ -34,7 +34,7 @@ func (s *HistoricalTradesService) SetLimit(limit int32) *HistoricalTradesService
 	return s
 }
 
-func (s *HistoricalTradesService) DisplayHistoricalTrade(ctx context.Context) *[]HistoricalTrades {
+func (s *HistoricalTradesService) DisplayHistoricalTrade(ctx context.Context) (*[]HistoricalTrades, error) {
 
 	r := &Request{
 		Method:     http.MethodGet,
@@ -55,14 +55,14 @@ func (s *HistoricalTradesService) DisplayHistoricalTrade(ctx context.Context) *[
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &[]HistoricalTrades{}, err
 	}
 
 	result := new([]HistoricalTrades)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &[]HistoricalTrades{}, err
 	}
 
-	return result
+	return result, nil
 }
