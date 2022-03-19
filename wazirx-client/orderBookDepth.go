@@ -3,8 +3,8 @@ package wazirx_client
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
+
 	helpers "github.com/yuvan11/wazirx-go/wazirx-client/Helpers"
 	api "github.com/yuvan11/wazirx-go/wazirx-client/endpoints"
 )
@@ -38,7 +38,7 @@ func (s *OrderBookDepthService) SetLimit(limit int32) *OrderBookDepthService {
 	return s
 }
 
-func (s *OrderBookDepthService) DisplayOrdersBookDepth(ctx context.Context) *OrderBookDepth {
+func (s *OrderBookDepthService) DisplayOrdersBookDepth(ctx context.Context) (*OrderBookDepth, error) {
 
 	r := &Request{
 		Method:     http.MethodGet,
@@ -59,15 +59,15 @@ func (s *OrderBookDepthService) DisplayOrdersBookDepth(ctx context.Context) *Ord
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &OrderBookDepth{}, err
 	}
 
 	//var result map[string]interface{}
 	result := new(OrderBookDepth)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &OrderBookDepth{}, err
 	}
 
-	return result
+	return result, nil
 }
