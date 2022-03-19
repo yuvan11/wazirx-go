@@ -170,10 +170,14 @@ command to run if program contains helper info
 		go test -v or go test
 ![image](https://user-images.githubusercontent.com/49576526/159119199-bf969747-f710-4fd7-9107-d3dcbbde17ac.png)
 
+## Contributing
+For contribution, have a look at [contributing.md](https://github.com/yuvan11/wazirx-go/blob/master/CONTRIBUTING.md)
+
+## License
+
+This project is licensed under the [MIT](https://en.wikipedia.org/wiki/MIT_License) License - see the [LICENSE](https://github.com/yuvan11/wazirx-go/blob/master/LICENSE) file for details
 
 ## Authors
-
-
 
 Yuvaraj [@yuvan11](https://twitter.com/yuvaraj_11_)
 
@@ -186,7 +190,5 @@ Yuvaraj [@yuvan11](https://twitter.com/yuvaraj_11_)
 * 0.1
     * Initial Release
 
-## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
 -->
