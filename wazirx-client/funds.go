@@ -3,7 +3,6 @@ package wazirx_client
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"net/http"
 
@@ -22,7 +21,7 @@ type FundInfo struct {
 	ReservedFee string `json:"reservedFee"`
 }
 
-func (s *FundInfoService) FetchFundsInfo(ctx context.Context) *[]FundInfo {
+func (s *FundInfoService) FetchFundsInfo(ctx context.Context) (*[]FundInfo, error) {
 
 	r := &Request{
 		Method:     http.MethodGet,
@@ -35,15 +34,15 @@ func (s *FundInfoService) FetchFundsInfo(ctx context.Context) *[]FundInfo {
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &[]FundInfo{}, err
 	}
 
 	result := new([]FundInfo)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &[]FundInfo{}, err
 	}
 
-	return result
+	return result, nil
 
 }
