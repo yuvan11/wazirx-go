@@ -3,7 +3,6 @@ package wazirx_client
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"net/http"
 
@@ -28,7 +27,7 @@ type Tickers struct {
 	At         int64  `json:"at"`
 }
 
-func (s *TickersService) DisplayTickersData(ctx context.Context) *[]Tickers {
+func (s *TickersService) DisplayTickersData(ctx context.Context) (*[]Tickers, error) {
 
 	r := &Request{
 		Method:   http.MethodGet,
@@ -39,14 +38,14 @@ func (s *TickersService) DisplayTickersData(ctx context.Context) *[]Tickers {
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &[]Tickers{}, err
 	}
 
 	result := new([]Tickers)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &[]Tickers{}, err
 	}
 
-	return result
+	return result, nil
 }
