@@ -7,7 +7,7 @@ A go client library for [wazirx](https://wazirx.com/exchange) REST [APIs](https:
 
 ## Description
 
-[wazirx-go](https://github.com/yuvan11/wazirx-go) is a go library for Wazirx Rest API integration for spot exchange
+[wazirx-go](https://github.com/yuvan11/wazirx-go) is a go library for Wazirx Rest API integration.
 
 ### Available APIs
 - [x] Common API
