@@ -268,11 +268,11 @@ func TestExchangeInfoService_FetchExchangeInfo(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			_, gotErr := tt.s.FetchExchangeInfo(tt.args.ctx)
-			if gotErr == nil {
+		
 				if err := gotErr != nil; err != tt.wantErr {
 					t.Errorf("ExchangeInfoService.FetchExchangeInfo() error = %v, wantErr %v", err, tt.wantErr)
 				}
-			}
+	
 			if gotErr != nil {
 				if err := gotErr == nil; err == tt.wantErr {
 					t.Errorf("ExchangeInfoService.FetchExchangeInfo() error = %v, wantErr %v", err, tt.wantErr)
