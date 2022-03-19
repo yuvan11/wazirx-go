@@ -3,7 +3,6 @@ package wazirx_client
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"net/http"
 
@@ -22,7 +21,7 @@ type AccountInfo struct {
 	UpdateTime  int64  `json:"updateTime"`
 }
 
-func (s *AccountInfoService) FetchAccountInfo(ctx context.Context) *AccountInfo {
+func (s *AccountInfoService) FetchAccountInfo(ctx context.Context) (*AccountInfo, error) {
 
 	r := &Request{
 		Method:     http.MethodGet,
@@ -35,15 +34,15 @@ func (s *AccountInfoService) FetchAccountInfo(ctx context.Context) *AccountInfo 
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &AccountInfo{}, err
 	}
 
 	result := new(AccountInfo)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &AccountInfo{}, err
 	}
 
-	return result
+	return result, nil
 
 }
