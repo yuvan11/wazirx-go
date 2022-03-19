@@ -162,6 +162,15 @@ command to run if program contains helper info
 ```
 -->
 
+## Unit Testing 
+	
+-	For running unit tests, 
+	
+		cd wazrix-client
+		go test -v or go test
+![image](https://user-images.githubusercontent.com/49576526/159119199-bf969747-f710-4fd7-9107-d3dcbbde17ac.png)
+
+
 ## Authors
 
 
