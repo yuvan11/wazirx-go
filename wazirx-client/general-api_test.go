@@ -22,7 +22,7 @@ func TestPingService_FetchPingStatus(t *testing.T) {
 		WantErr bool
 	}{
 		{
-			name: `Ping Service Test Positive`,
+			name: `Ping Service Test`,
 			s: &PingService{C: &Client{
 				ApiKey:     "",
 				Secretkey:  "",
@@ -38,32 +38,13 @@ func TestPingService_FetchPingStatus(t *testing.T) {
 			wantRes: "{ }",
 			WantErr: false,
 		},
-		{
-			name: `Ping Service Test Negative(removing BASEURL)`,
-			s: &PingService{C: &Client{
-				ApiKey:     "",
-				Secretkey:  "",
-				BaseURL:    "",
-				HTTPClient: http.Client{},
-				do: func(req *http.Request) (*http.Response, error) {
-					return *&req.Response, nil
-				},
-			}},
-			args: args{
-				ctx: context.TODO(),
-			},
-			wantRes: "",
-			WantErr: true,
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotRes, gotErr := tt.s.FetchPingStatus(tt.args.ctx); gotRes != tt.wantRes && gotErr != nil {
 				t.Errorf("PingService.FetchPingStatus() = %v, want %v", gotRes, tt.wantRes)
 			}
-			if gotRes, gotErr := tt.s.FetchPingStatus(tt.args.ctx); gotRes == tt.wantRes && gotErr == nil {
-				t.Errorf("PingService.FetchPingStatus() = %v, want %v", gotRes, tt.wantRes)
-			}
+
 		})
 	}
 }
@@ -80,7 +61,7 @@ func TestServerTimeService_FetchServerTime(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "Server Time Test +ve",
+			name: "Server Time Test ",
 			s: &ServerTimeService{
 				C: &Client{
 					ApiKey:     "",
@@ -100,40 +81,13 @@ func TestServerTimeService_FetchServerTime(t *testing.T) {
 			},
 			wantErr: false,
 		},
-		{
-			name: "Server Time Test -ve(Removing BASE URL)",
-			s: &ServerTimeService{
-				C: &Client{
-					ApiKey:     "",
-					Secretkey:  "",
-					BaseURL:    "",
-					HTTPClient: http.Client{},
-					do: func(req *http.Request) (*http.Response, error) {
-						return *&req.Response, nil
-					},
-				},
-			},
-			args: args{
-				ctx: context.TODO(),
-			},
-			want: &ServerTime{
-				ServerTime: 0,
-			},
-			wantErr: true,
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			_, gotErr := tt.s.FetchServerTime(tt.args.ctx)
-			if gotErr == nil {
-				if err := gotErr != nil; err != tt.wantErr {
-					t.Errorf("ServerTimeService.FetchServerTime() = %v, want %v", err, tt.wantErr)
-				}
-			}
-			if gotErr != nil {
-				if err := gotErr == nil; err == tt.wantErr {
-					t.Errorf("ServerTimeService.FetchServerTime() = %v, want %v", err, tt.wantErr)
-				}
+
+			if err := gotErr != nil; err != tt.wantErr {
+				t.Errorf("ServerTimeService.FetchServerTime() = %v, want %v", err, tt.wantErr)
 			}
 
 		})
@@ -173,45 +127,17 @@ func TestSystemStatusService_FetchSystemStatus(t *testing.T) {
 			},
 			wantErr: false,
 		},
-		{
-			// TODO: Add test cases.
-			name: `System Status Test Negative`,
-			s: &SystemStatusService{
-				C: &Client{
-					ApiKey:     "",
-					Secretkey:  "",
-					BaseURL:    "",
-					HTTPClient: http.Client{},
-					do: func(req *http.Request) (*http.Response, error) {
-						return *&req.Response, nil
-					},
-				}},
-			args: args{
-				ctx: context.TODO(),
-			},
-			want: &SystemStatus{
-				Status:  "",
-				Message: "",
-			},
-			wantErr: true,
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, gotErr := tt.s.FetchSystemStatus(tt.args.ctx)
-			if gotErr == nil {
-				if err := gotErr != nil; err != tt.wantErr {
-					t.Errorf("SystemStatusService.FetchSystemStatus() error = %v, wantErr %v", err, tt.wantErr)
-					return
-				}
-				if !reflect.DeepEqual(got, tt.want) {
-					t.Errorf("SystemStatusService.FetchSystemStatus() = %v, want %v", got, tt.want)
-				}
-			} else {
-				if err := gotErr == nil; err == tt.wantErr {
-					t.Errorf("SystemStatusService.FetchSystemStatus() error = %v, wantErr %v", err, tt.wantErr)
-					return
-				}
+
+			if err := gotErr != nil; err != tt.wantErr {
+				t.Errorf("SystemStatusService.FetchSystemStatus() error = %v, wantErr %v", err, tt.wantErr)
+
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("SystemStatusService.FetchSystemStatus() = %v, want %v", got, tt.want)
 			}
 
 		})
@@ -246,37 +172,14 @@ func TestExchangeInfoService_FetchExchangeInfo(t *testing.T) {
 			},
 			wantErr: false,
 		},
-		{
-			name: "Exchange Info Test -ve(Removing base URL)",
-			s: &ExchangeInfoService{
-				C: &Client{
-					ApiKey:     "",
-					Secretkey:  "",
-					BaseURL:    "",
-					HTTPClient: http.Client{},
-					do: func(req *http.Request) (*http.Response, error) {
-						return &http.Response{}, nil
-					},
-				},
-			},
-			args: args{
-				ctx: context.TODO(),
-			},
-			wantErr: true,
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			_, gotErr := tt.s.FetchExchangeInfo(tt.args.ctx)
-		
-				if err := gotErr != nil; err != tt.wantErr {
-					t.Errorf("ExchangeInfoService.FetchExchangeInfo() error = %v, wantErr %v", err, tt.wantErr)
-				}
-	
-			if gotErr != nil {
-				if err := gotErr == nil; err == tt.wantErr {
-					t.Errorf("ExchangeInfoService.FetchExchangeInfo() error = %v, wantErr %v", err, tt.wantErr)
-				}
+
+			if err := gotErr != nil; err != tt.wantErr {
+				t.Errorf("ExchangeInfoService.FetchExchangeInfo() error = %v, wantErr %v", err, tt.wantErr)
+
 			}
 
 		})
