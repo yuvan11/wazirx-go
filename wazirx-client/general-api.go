@@ -130,7 +130,7 @@ type ExchangeInfoService struct {
 	C *Client
 }
 
-func (s *ExchangeInfoService) FetchExchangeInfo(ctx context.Context) *ExchangeInfo {
+func (s *ExchangeInfoService) FetchExchangeInfo(ctx context.Context) (*ExchangeInfo, error) {
 
 	r := &Request{
 		Method:   http.MethodGet,
@@ -141,14 +141,14 @@ func (s *ExchangeInfoService) FetchExchangeInfo(ctx context.Context) *ExchangeIn
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &ExchangeInfo{}, err
 	}
 
 	result := new(ExchangeInfo)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON", err)
+		return &ExchangeInfo{}, err
 	}
 
-	return result
+	return result, nil
 }
