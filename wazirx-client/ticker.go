@@ -3,8 +3,8 @@ package wazirx_client
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
+
 	api "github.com/yuvan11/wazirx-go/wazirx-client/endpoints"
 )
 
@@ -32,7 +32,7 @@ func (s *TickerService) SetSymbol(symbol string) *TickerService {
 	return s
 }
 
-func (s *TickerService) TickerData(ctx context.Context) *Ticker {
+func (s *TickerService) TickerData(ctx context.Context) (*Ticker, error) {
 
 	r := &Request{
 		Method:   http.MethodGet,
@@ -47,15 +47,15 @@ func (s *TickerService) TickerData(ctx context.Context) *Ticker {
 	data, err := s.C.HandleAPI(ctx, r)
 
 	if err != nil {
-		fmt.Println(err)
+		return &Ticker{}, err
 	}
 
 	result := new(Ticker)
 
 	if err := json.Unmarshal(data, &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		return &Ticker{}, err
 	}
 
-	return result
+	return result, nil
 
 }
