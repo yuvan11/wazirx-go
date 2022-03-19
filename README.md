@@ -73,11 +73,15 @@ It is prerequisite to have Go installed on your machine. [Steps to install Go](h
 <img  src="https://user-images.githubusercontent.com/49576526/158992492-3a0197d7-7e36-45c0-b63c-5dfa277a295c.png" width="400" height="250">
 </p>
 
+
 ### Executing program
 
     cd wazirx-go/cmd
     go run main.go
-        
+
+#### Note:
+Don't forget to add API_KEY and SECRET_KEY in the code [here](https://github.com/yuvan11/wazirx-go/blob/bcae82aa8a01d7ca1173ba425b54dcae6ef59023/wazirx-client/Endpoints/endpoints.go#L33), as these are expected by some APIs for code & test execution.
+		Otherwise, error will be thrown
 - #### Starting a client
         
 ``` go
@@ -161,6 +165,8 @@ Any advise for common problems or issues.
 command to run if program contains helper info
 ```
 -->
+
+
 
 ## Unit Testing 
 	
