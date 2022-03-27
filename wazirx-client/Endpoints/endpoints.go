@@ -1,4 +1,4 @@
-package Endpoints
+package endpoints
 
 const (
 
@@ -31,5 +31,5 @@ const (
 	//API KEYS
 
 	API_KEY    = "YOUR_API_KEY"
-	SECRET_KEY = "YOUR_SECRET_KEY"
+	SECRET_KEY = "YUR_SECRET_KEY"
 )
