@@ -1,4 +1,4 @@
-# Wazirx-go
+# Wazirx-go ![example workflow](https://github.com/yuvan11/wazirx-go/actions/workflows/go.yml/badge.svg)
 A go client library for [wazirx](https://wazirx.com/exchange) REST [APIs](https://docs.wazirx.com/)
 
 <p align="center" >
