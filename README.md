@@ -78,6 +78,12 @@ It is prerequisite to have Go installed on your machine. [Steps to install Go](h
 
     cd wazirx-go/cmd
     go run main.go
+<!--
+#### For docker execution
+    
+    docker pull 54531199/wazirx-go:1.0
+    docker run 54531199/wazirx-go:1.0
+-->
 
 #### Note:
 Don't forget to add API_KEY and SECRET_KEY in the code [here](https://github.com/yuvan11/wazirx-go/blob/bcae82aa8a01d7ca1173ba425b54dcae6ef59023/wazirx-client/Endpoints/endpoints.go#L33), as these are expected by some APIs for code & test execution.
